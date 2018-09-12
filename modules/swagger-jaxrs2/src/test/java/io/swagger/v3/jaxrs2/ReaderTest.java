@@ -402,6 +402,7 @@ public class ReaderTest {
                 "          content:\n" +
                 "            application/json:\n" +
                 "              schema:\n" +
+                "                type: object\n" +
                 "                allOf:\n" +
                 "                - $ref: '#/components/schemas/MultipleSub1Bean'\n" +
                 "                - $ref: '#/components/schemas/MultipleSub2Bean'\n" +
@@ -424,6 +425,7 @@ public class ReaderTest {
                 "          content:\n" +
                 "            application/json:\n" +
                 "              schema:\n" +
+                "                type: object\n" +
                 "                anyOf:\n" +
                 "                - $ref: '#/components/schemas/MultipleSub1Bean'\n" +
                 "                - $ref: '#/components/schemas/MultipleSub2Bean'\n" +
@@ -446,6 +448,7 @@ public class ReaderTest {
                 "          content:\n" +
                 "            application/json:\n" +
                 "              schema:\n" +
+                "                type: object\n" +
                 "                oneOf:\n" +
                 "                - $ref: '#/components/schemas/MultipleSub1Bean'\n" +
                 "                - $ref: '#/components/schemas/MultipleSub2Bean'\n" +

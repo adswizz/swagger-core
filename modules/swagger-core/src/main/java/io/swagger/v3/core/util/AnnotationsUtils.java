@@ -1118,9 +1118,10 @@ public abstract class AnnotationsUtils {
         } else {
             Optional<Schema> schemaFromAnnotation = AnnotationsUtils.getSchemaFromAnnotation(schemaAnnotation, components, jsonViewAnnotation);
             if (schemaFromAnnotation.isPresent()) {
-                if (StringUtils.isBlank(schemaFromAnnotation.get().get$ref())
-                        && StringUtils.isBlank(schemaFromAnnotation.get().getType())
-                        && !ComposedSchema.class.isAssignableFrom(schemaFromAnnotation.get().getClass())) {
+                if (ComposedSchema.class.isAssignableFrom(schemaFromAnnotation.get().getClass())) {
+                    schemaFromAnnotation.get().setType("object");//workaround for swagger UI
+                } else if (StringUtils.isBlank(schemaFromAnnotation.get().get$ref())
+                        && StringUtils.isBlank(schemaFromAnnotation.get().getType())) {
                     // default to string
                     schemaFromAnnotation.get().setType("string");
                 }
