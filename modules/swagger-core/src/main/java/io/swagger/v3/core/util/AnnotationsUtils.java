@@ -1118,7 +1118,9 @@ public abstract class AnnotationsUtils {
         } else {
             Optional<Schema> schemaFromAnnotation = AnnotationsUtils.getSchemaFromAnnotation(schemaAnnotation, components, jsonViewAnnotation);
             if (schemaFromAnnotation.isPresent()) {
-                if (StringUtils.isBlank(schemaFromAnnotation.get().get$ref()) && StringUtils.isBlank(schemaFromAnnotation.get().getType())) {
+                if (StringUtils.isBlank(schemaFromAnnotation.get().get$ref())
+                        && StringUtils.isBlank(schemaFromAnnotation.get().getType())
+                        && !ComposedSchema.class.isAssignableFrom(schemaFromAnnotation.get().getClass())) {
                     // default to string
                     schemaFromAnnotation.get().setType("string");
                 }
@@ -1660,10 +1662,10 @@ public abstract class AnnotationsUtils {
 
             @Override
             public String[] allowableValues() {
-                if (master.requiredProperties().length > 0 || patch.requiredProperties().length == 0) {
-                    return master.requiredProperties();
+                if (master.allowableValues().length > 0 || patch.allowableValues().length == 0) {
+                    return master.allowableValues();
                 }
-                return patch.requiredProperties();
+                return patch.allowableValues();
             }
 
             @Override
